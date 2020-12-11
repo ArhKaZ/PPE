@@ -1,0 +1,326 @@
+﻿using System;
+using System.Windows.Data;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using ModelLayer.Business;
+using ModelLayer.Data;
+namespace PPE.viewModel
+{
+    class viewModelClient : viewModelBase
+    {
+        private DaoClient vmDaoClient;
+        private ICommand insertCommand;
+        private ICommand updateCommand;
+        private ICommand deleteCommand;
+        private ICommand clearCommand;
+        private ObservableCollection<Client> listClient;
+        private Client leCli = new Client();
+
+        public ObservableCollection<Client> ListClient { get => listClient; set => listClient = value; }
+        public Client Client
+        {
+            get => leCli;
+            set
+            {
+                if (leCli != value)
+                {
+                    leCli = value;
+                    OnPropertyChanged("Client");
+                    OnPropertyChanged("Nom");
+                    OnPropertyChanged("Prenom");
+                    OnPropertyChanged("Telephone");
+                    OnPropertyChanged("Mail");
+                    OnPropertyChanged("Credit");
+                    OnPropertyChanged("DateNaissance");
+                    OnPropertyChanged("Photo");
+                    OnPropertyChanged("NbPartie");
+                }
+            }
+        }
+        public viewModelClient(DaoClient theDaoClient)
+        {
+            vmDaoClient = theDaoClient;
+            listClient = new ObservableCollection<Client>(theDaoClient.SelectAll());
+        }
+
+        public string Nom
+        {
+
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Nom;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            set
+            {
+                if (leCli.Nom != value)
+                {
+                    leCli.Nom = value;
+                    OnPropertyChanged("Nom");
+
+                }
+            }
+        }
+
+        public MouseBinding SetNull
+        {
+            set
+            {
+                leCli = null;
+            }
+        }
+        public string Prenom
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Nom;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (leCli.Prenom != value)
+                {
+                    leCli.Prenom = value;
+                    OnPropertyChanged("Prenom");
+                }
+            }
+        }
+
+        public int Telephone
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Telephone;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (leCli.Telephone != value)
+                {
+                    leCli.Telephone = value;
+                    OnPropertyChanged("Telephone");
+                }
+            }
+        }
+
+        public string Mail
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Mail;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (leCli.Mail != value)
+                {
+                    leCli.Mail = value;
+                    OnPropertyChanged("Mail");
+                }
+            }
+        }
+
+        public int Credit
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Credit;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (leCli.Credit != value)
+                {
+                    leCli.Credit = value;
+                    OnPropertyChanged("Credit");
+                }
+            }
+        }
+
+        public DateTime DateNaissance
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.DateNaissance;
+                }
+                else
+                {
+                    return new DateTime();
+                }
+            }
+            set
+            {
+                if (leCli.DateNaissance != value)
+                {
+                 
+                    leCli.DateNaissance = value;
+
+                }
+            }
+        }
+
+        public string Photo
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Photo;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (leCli.Photo != value)
+                {
+                    leCli.Photo = value;
+                    OnPropertyChanged("Photo");
+                }
+            }
+        }
+
+        public int NbPartie
+        {
+            get
+            {
+                if (leCli != null)
+                {
+                    return leCli.Nbpartie;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                if (leCli.Nbpartie != value)
+                {
+                    leCli.Nbpartie = value;
+                    OnPropertyChanged("NbPartie");
+
+             
+        }
+    }
+}
+
+        public void RefreshListCli()
+        {
+            ObservableCollection<Client> lalistClient = new ObservableCollection<Client>(vmDaoClient.SelectAll());
+            listClient.Clear();
+            foreach (Client c in lalistClient)
+            {
+                listClient.Add(c);
+            }
+        }
+        public ICommand UpdateCommand
+        {
+            get
+            {
+                    if (this.updateCommand == null)
+                    {
+                    this.updateCommand = new RelayCommand(() => UpdateClient(), () => true);
+                            }
+           
+                    return this.updateCommand;
+
+            }
+
+        }
+        public ICommand InsertCommand
+        {
+            get
+            {
+                if (this.insertCommand == null)
+                {
+                    this.insertCommand = new RelayCommand(() => InsertClient(), () => true);
+                }
+                return this.insertCommand;
+
+            }
+
+        }
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (this.deleteCommand == null)
+                {
+                    this.deleteCommand = new RelayCommand(() => DeleteClient(), () => true);
+                }
+                return this.deleteCommand;
+
+            }
+
+        }
+
+        private void UpdateClient()
+        {
+            
+            vmDaoClient.Update(Client);
+            RefreshListCli();
+        }
+        
+        private void InsertClient()
+        {
+            vmDaoClient.Insert(Client);
+            RefreshListCli();
+            //listClient.Add(Client);
+        }
+
+        private void DeleteClient()
+        {
+            int index = listClient.IndexOf(Client);
+            vmDaoClient.Delete(leCli);
+            //listClient.Remove(Client);
+            RefreshListCli();
+        }
+
+        private void Rechercher()
+        {
+
+        }
+
+    }
+}
