@@ -27,6 +27,17 @@ namespace ModelLayer.Data
             DataRow myRow = theDbal.SelectLastId("Clients");
             return (int)myRow["id"] + 1;
         }
+
+        public List<Client> SearchbyName(string table, string conditions)
+        {
+            List<Client> listClient = new List<Client>();
+            DataTable myTable = theDbal.SelectByField(table, conditions);
+            foreach (DataRow r in myTable.Rows)
+            {
+                listClient.Add(new Client((int)r["id"], (string)r["nom"], (string)r["prenom"], (int)r["telephone"], (string)r["mail"], (int)r["credit"], (DateTime)r["dateNaissance"], (int)r["NbPartie"]));
+            }
+            return listClient;
+        }
         public void Insert(Client theClient)
         {
             int id = ReturnnextId();
@@ -82,6 +93,7 @@ namespace ModelLayer.Data
             this.theDbal.Update(query);
 
         }
+
 
         public List<Client> SelectAll()
         {

@@ -17,10 +17,11 @@ namespace PPE.viewModel
         private ICommand insertCommand;
         private ICommand updateCommand;
         private ICommand deleteCommand;
-        private ICommand clearCommand;
+        private ICommand searchCommand;
         private ObservableCollection<Client> listClient;
         private Client leCli = new Client();
 
+        public string Recherche { get; set; }
         public ObservableCollection<Client> ListClient { get => listClient; set => listClient = value; }
         public Client Client
         {
@@ -87,7 +88,7 @@ namespace PPE.viewModel
             {
                 if (leCli != null)
                 {
-                    return leCli.Nom;
+                    return leCli.Prenom;
                 }
                 else
                 {
@@ -190,7 +191,7 @@ namespace PPE.viewModel
             {
                 if (leCli.DateNaissance != value)
                 {
-                 
+
                     leCli.DateNaissance = value;
 
                 }
@@ -240,10 +241,10 @@ namespace PPE.viewModel
                     leCli.Nbpartie = value;
                     OnPropertyChanged("NbPartie");
 
-             
+
+                }
+            }
         }
-    }
-}
 
         public void RefreshListCli()
         {
@@ -258,12 +259,12 @@ namespace PPE.viewModel
         {
             get
             {
-                    if (this.updateCommand == null)
-                    {
+                if (this.updateCommand == null)
+                {
                     this.updateCommand = new RelayCommand(() => UpdateClient(), () => true);
-                            }
-           
-                    return this.updateCommand;
+                }
+
+                return this.updateCommand;
 
             }
 
@@ -294,14 +295,26 @@ namespace PPE.viewModel
             }
 
         }
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (this.searchCommand == null)
+                {
+                    this.searchCommand = new RelayCommand(() => Rechercher(), () => true);
+                }
+                return this.searchCommand;
+
+            }
+        }
 
         private void UpdateClient()
         {
-            
+
             vmDaoClient.Update(Client);
             RefreshListCli();
         }
-        
+
         private void InsertClient()
         {
             vmDaoClient.Insert(Client);
@@ -317,10 +330,19 @@ namespace PPE.viewModel
             RefreshListCli();
         }
 
+
         private void Rechercher()
         {
-
+            if (this.Recherche != null)
+            {
+                List<Client> listClienIndep = new List<Client>(vmDaoClient.SearchbyName("Clients", "Nom Like '" + this.Recherche + "' or Prenom like '" + this.Recherche + "'"));
+                listClient.Clear();
+                foreach (Client c in listClienIndep)
+                {
+                    listClient.Add(c);
+                }
+            }
         }
-
     }
 }
+
