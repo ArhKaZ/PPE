@@ -26,12 +26,35 @@ namespace ModelLayer.Data
             this.theDaoClient = theDaoClient;
             this.theDaoReservation = theDaoReservation;
         }
-         
-        
+
+        public int ReturnnextId()
+        {
+            DataRow myRow = mydbal.SelectLastId("Reservation");
+            return (int)myRow["id"] + 1;
+        }
+
+        public List<Reservation> LesReservSansTransac()
+        {
+            List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
+            List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
+            foreach (Transaction t in lesTransac)
+            {
+                // Test pour savoir si une transac existe pour une reservation
+            }
+        }
+        //public bool TestCreditMontant(Client uncli,int Montant)
+        //{
+        //    if ()
+        //    if (Montant > uncli.Credit)
+        //    {
+                
+        //    }
+        //}
         public void Insert(Transaction uneTransac)
         {
+            int id = ReturnnextId();
             string query = "Transaction (id, operation, montant, reservation, idclient) VALUES ("
-                + uneTransac.Id + ",'"
+                + id + ",'"
                 + uneTransac.Operation + "',"
                 + uneTransac.Montant + ","
                 + uneTransac.Reservation.Id + ","

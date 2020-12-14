@@ -77,7 +77,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="Lst_ClientsC" SelectedItem="{Binding Client}" Grid.Column="0" Grid.Row="1" BorderBrush="Black" Background="#FFD3E9F7" ItemsSource="{Binding ListClient}" Grid.RowSpan="8" />
+                    <ListBox x:Name="Lst_ClientsC" SelectedItem="{Binding Client}" Grid.Column="0" Grid.Row="1" BorderBrush="Black" ItemsSource="{Binding ListClient}" Grid.RowSpan="8" />
                     <TextBlock x:Name="Txt_Def0" Grid.Column="0" Grid.Row="0" Height="30" Width="110" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="360,30" Text="Rechercher : "/>
                     <TextBox x:Name="Txt_SearchCC" Text="{Binding Rechercher}" Grid.Column="0" Grid.Row="0" Width="350" Height="40" HorizontalAlignment="Right" Background="#FFD3E9F7" FontSize="30" />
                     <Rectangle x:Name="Rc_Tour1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Stroke="Black"/>
@@ -92,10 +92,12 @@
                     <TextBlock x:Name="Txt_NomRc2" Grid.Column="2" Grid.Row="5" Height="40" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="20" Text="Créditer / Débiter " FontSize="25" FontWeight="Bold"/>
                     <Rectangle x:Name="Rc_Change" Grid.Column="1" Grid.Row="5" Stroke="Black" Grid.ColumnSpan="3" Grid.RowSpan="4"/>
                     <TextBlock x:Name="Txt_Def4" Grid.Column="1" Grid.Row="6" Height="30" Width="90" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,170,50" Text="Montant : "/>
-                    <TextBox x:Name="Txt_Montant" Grid.Column="1" Text="{Binding Montant}" Grid.Row="6" Width="300" Height="30" Margin="0,50,250,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFD3E9F7" Grid.ColumnSpan="2" />
+                    <TextBox x:Name="Txt_Montant" Grid.Column="1" Text="{Binding Montant}" Grid.Row="6" Height="30" Margin="43,60,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFD3E9F7" />
                     <RadioButton x:Name="Rd_Credit" Grid.Column="2" IsChecked="{Binding Path=ModeArray[0], Mode=TwoWay}" Grid.Row="6" Margin="190,60,0,0" FontSize="20" Content="Créditer" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                     <RadioButton x:Name="Rd_Debit" Grid.Column="3" IsChecked="{Binding Path=ModeArray[1], Mode=TwoWay}" Grid.Row="6" Margin="190,60,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="20" Content="Débiter"/>
                     <Button x:Name="Btn_Val" Command="{Binding Valider}" Content="Valider" Width="150" Height="30" Grid.Column="3" Grid.Row="7" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <TextBlock x:Name="Txt_Def20" Grid.Column="1" Grid.Row="7" Height="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="29,10,299,60" Text="Transaction de Reservation a faire : " Grid.ColumnSpan="2"/>
+                    <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="43,55,0,0" Grid.Row="7" VerticalAlignment="Top" Width="300" Grid.ColumnSpan="2" SelectedItem="{Binding ReservChoix}" ItemsSource="{Binding ListReservationAF}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Transactions" Height="50" Width="120">

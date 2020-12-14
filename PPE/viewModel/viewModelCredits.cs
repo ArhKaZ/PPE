@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Windows.Data;
+using System.ComponentModel;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Collections.ObjectModel;
 using ModelLayer.Business;
 using ModelLayer.Data;
 namespace PPE.viewModel
@@ -19,36 +21,14 @@ namespace PPE.viewModel
         private ObservableCollection<Transaction> listTransaction;
         private Client leCli = new Client();
         private Transaction laTransaction = new Transaction();
-        
+        private ObservableCollection<Reservation> listReservationAF;
         //Public
         public ObservableCollection<Client> ListClient { get => listClient; set => listClient = value; }
         public ObservableCollection<Transaction> ListTransaction { get => listTransaction; set => listTransaction = value; }
-
-        public Transaction Transaction
-        {
-            get => laTransaction;
-            set
-            {
-                if (laTransaction != value)
-                {
-                    DaoTransaction theDaoTransaction = vmDaoTransaction;
-                    DaoClient theDaoClient = vmDaoClient;
-                    laTransaction = value;
-                    listTransaction = new ObservableCollection<Transaction>(theDaoTransaction.SelectAll());
-                    listClient = new ObservableCollection<Client>(theDaoClient.SelectAll());
-                    foreach (Transaction t in listTransaction)
-                    {
-                        foreach (Client c in listClient)
-                        {
-                            if (t.IdClient.Id == c.Id)
-                            {
-                                t.IdClient = c;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        public ObservableCollection<Reservation> ListReservationAF { get => listReservationAF; set => listReservationAF = value; }
+        public int Montant { get; set; }
+        public string Operation { get; set; }
+        
 
         public bool[] ModeArray
         {
@@ -70,9 +50,6 @@ namespace PPE.viewModel
                     OnPropertyChanged("Nom");
                     OnPropertyChanged("Credit");
                     OnPropertyChanged("NbPartie");
-                    OnPropertyChanged("Montant");
-                    OnPropertyChanged("SCredit");
-                    OnPropertyChanged("Valider");
                 }
 
             }
@@ -117,71 +94,34 @@ namespace PPE.viewModel
             }
         }
 
-        public int Montant
-        {
-            get => laTransaction.Montant;
-            set
-            {
-                if (laTransaction.Montant != value) 
-                {
-                    laTransaction.Montant = value;
-                    OnPropertyChanged("Montant");
-                
-                }
-            }
-        }
+          
        
-     
-            
-        public string Operation
-        {
-            get => laTransaction.Operation;
-            set
-            {
-                if (laTransaction.Operation != "D")
-                {
-                    laTransaction.Operation = value;
-                    
-                }
-            }
-        }
 
-        public viewModelCredits(DaoClient theDaoClient, DaoTransaction theDaoTransaction)
+        public viewModelCredits(DaoClient theDaoClient)
         {
             vmDaoClient = theDaoClient;
-            vmDaoTransaction = theDaoTransaction;
+           
             listClient = new ObservableCollection<Client>(theDaoClient.SelectAll());
-
-            listTransaction = new ObservableCollection<Transaction>(theDaoTransaction.SelectAll());
-
-            foreach (Transaction t in listTransaction)
-            {
-                foreach (Client c in listClient)
-                {
-                    if (t.IdClient.Id == c.Id)
-                    {
-                        t.IdClient = c;
-                    }
-                }
-            }
+            
         }
 
-        public ICommand Valider
-        {
-            get
-            {
-                if (this.insertCommand == null)
-                {
-                    this.insertCommand = new RelayCommand(() => InsertCommand(), () => true);
-                }
-                return this.insertCommand;
-            }
-        }
+        //public ICommand Valider
+        //{
+        //    get
+        //    {
+        //        if (this.insertCommand == null)
+        //        {
+        //            this.insertCommand = new RelayCommand(() => InsertTransac(), () => true);
+        //        }
+        //        return this.insertCommand;
+        //    }
+        //}
 
-        private void InsertCommand()
+        private void InsertTransac()
         {
-            int idf = 0;
-            vmDaoClient.Insert(Client);
+            int id = vmDaoTransaction.ReturnnextId();
+            Transaction maTransac = new Transaction(id, Operation, Montant, leCli.);
+            vmDaoTransaction.Insert(Client);
             foreach (Client c in listClient)
             {
                 idf = idf + 1;

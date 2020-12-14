@@ -23,7 +23,14 @@ namespace ModelLayer.Business
             IdClient = idClient;
         }
         
-        public Transaction(){}
+        public Transaction(int id, string operation, int montant, Client Client)
+        {
+            Id = id;
+            Operation = operation;
+            Montant = montant;
+            IdClient = Client;
+        }
+        public Transaction() { }
 
         public int Id { get => id ; set => id = value; }
         public string Operation { get => operation; set => operation = value; }

@@ -333,7 +333,7 @@ namespace PPE.viewModel
 
         private void Rechercher()
         {
-            if (this.Recherche != null)
+            if (this.Recherche != "")
             {
                 List<Client> listClienIndep = new List<Client>(vmDaoClient.SearchbyName("Clients", "Nom Like '" + this.Recherche + "' or Prenom like '" + this.Recherche + "'"));
                 listClient.Clear();
@@ -342,6 +342,7 @@ namespace PPE.viewModel
                     listClient.Add(c);
                 }
             }
+            else RefreshListCli();
         }
     }
 }
