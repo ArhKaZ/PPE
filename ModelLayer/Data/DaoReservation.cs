@@ -34,7 +34,7 @@ namespace ModelLayer.Data
         public void Insert(Reservation uneReservation)
         {
             string query = "Reservation (dateRes, id, idClient, idSalle, prix, idtechnicien, nbClient, idTheme) VALUES ('"
-                + uneReservation.DateRes + "',"
+                + uneReservation.DateRes + "'," //Pas de Modificateur?
                 + uneReservation.Id + ","
                 + uneReservation.IdClient.Id + ","
                 + uneReservation.IdSalle.Id + ","

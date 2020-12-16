@@ -18,13 +18,16 @@ namespace ModelLayer.Business
             IdLieu = idLieu;
             IdTheme = idTheme;
         }
-        
-        public Salle(){}
+
+        public Salle() { }
 
         public int Id { get => id; set => id = value; }
         public Ville IdLieu { get => idLieu; set => idLieu = value; }
         public Theme IdTheme { get => idTheme; set => idTheme = value; }
-        
-       
+
+        public override string ToString()
+        {
+            return this.IdLieu.Nom + "--" + this.id.ToString();
+        }
     }
 }

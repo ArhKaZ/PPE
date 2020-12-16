@@ -41,7 +41,11 @@ namespace ModelLayer.Business
 
         public Reservation() { }
 
-        
-       
+        public override string ToString()
+        {
+            return this.dateRes.ToString() + "--" + this.idClient.Nom.ToString() + "--" + this.idClient.Prenom.ToString();
+        }
+
+
     }
 }

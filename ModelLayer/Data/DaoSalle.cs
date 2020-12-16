@@ -15,30 +15,25 @@ namespace ModelLayer.Data
 {
     public class DaoSalle
     {
-        private Dbal myDbal;
+        private Dbal mydbal;
         private DaoSalle theDaoSalle;
         private DaoVille theDaoVille;
         private DaoTheme theDaoTheme;
         public DaoSalle(Dbal dbal, DaoVille theDaoVille, DaoTheme theDaoTheme)
         {
-            this.myDbal = dbal;
+            mydbal = dbal;
             this.theDaoVille = theDaoVille;
             this.theDaoTheme = theDaoTheme;
         }
 
-        public int ReturnnnextIf()
-        {
-            DataRow myrow = myDbal.SelectLastId("Salle");
-            return (int)myrow["id"] + 1;
-        }
         public void Insert(Salle uneSalle)
         {
             string query = "Salle (id, idLieu, idTheme) VALUES ("
                 + uneSalle.Id + ","
                 + uneSalle.IdLieu.Id + ","
                 + uneSalle.IdTheme.Id + ")";
-                
-            this.myDbal.Insert(query);
+
+            this.mydbal.Insert(query);
 
         }
 
@@ -47,20 +42,20 @@ namespace ModelLayer.Data
             string query = "Salle Set id= " + uneSalle.Id
                 + ", idLieu = " + uneSalle.IdLieu.Id
                 + ", idTheme = " + uneSalle.IdTheme.Id;
-              
-            this.myDbal.Update(query);
+
+            this.mydbal.Update(query);
         }
 
         public void Delete(Salle uneSalle)
         {
             string query = "Salle Where id = " + uneSalle.Id;
-            this.myDbal.Delete(query);
+            this.mydbal.Delete(query);
         }
 
         public List<Salle> SelectAll()
         {
             List<Salle> listSalle = new List<Salle>();
-            DataTable myTable = this.myDbal.SelectAll("Salle");
+            DataTable myTable = this.mydbal.SelectAll("salle");
 
             foreach (DataRow s in myTable.Rows)
             {
@@ -73,7 +68,7 @@ namespace ModelLayer.Data
 
         public Salle SelectById(int id)
         {
-            DataRow rowSalle = this.myDbal.SelectById("Salle", id);
+            DataRow rowSalle = this.mydbal.SelectById("salle", id);
             Ville maVille = this.theDaoVille.SelectbyId((int)rowSalle["idLieu"]);
             Theme monTheme = this.theDaoTheme.SelectById((int)rowSalle["idTheme"]);
             return new Salle((int)rowSalle["id"], maVille, monTheme);

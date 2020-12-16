@@ -13,7 +13,7 @@ namespace ModelLayer.Business
         private int montant;
         private Reservation reservation;
         private Client idClient;
-
+        private DateTime dateTransac;
         public Transaction(int id, string operation, int montant, Reservation reservation, Client idClient)
         {
             Id = id;
@@ -21,15 +21,34 @@ namespace ModelLayer.Business
             Montant = montant;
             Reservation = reservation;
             IdClient = idClient;
+            DateTransac = DateTime.Now;
         }
-        
-        public Transaction(int id, string operation, int montant, Client Client)
+
+        public Transaction(int id, string operation, int montant, int reservation, Client idClient)
         {
             Id = id;
             Operation = operation;
             Montant = montant;
-            IdClient = Client;
+            List<Transaction> reserv = new List<Transaction>();
+            foreach (Reservation r in reserv)
+            {
+                if (r.)
+            }
+            Reservation = reservation;
+            IdClient = idClient;
+            DateTransac = DateTime.Now;
         }
+
+        public Transaction(int id, string operation, int montant, Client idClient)
+        {
+            Id = id;
+            Operation = operation;
+            Montant = montant;
+            Reservation = reservation;
+            IdClient = idClient;
+            DateTransac = DateTime.Now;
+        }
+
         public Transaction() { }
 
         public int Id { get => id ; set => id = value; }
@@ -37,5 +56,6 @@ namespace ModelLayer.Business
         public int Montant { get => montant; set => montant= value; }
         public Reservation Reservation { get => reservation; set => reservation = value; }
         public Client IdClient { get => idClient; set => idClient = value; }
+        public DateTime DateTransac { get => dateTransac; set => dateTransac = value; }
     }
 }

@@ -32,59 +32,43 @@ namespace ModelLayer.Data
             DataRow myRow = mydbal.SelectLastId("Reservation");
             return (int)myRow["id"] + 1;
         }
-
-        public List<Reservation> LesReservSansTransac()
+        
+        
+        public List<int> ReturnAllIdReserv()
         {
-            List<Reservation> pasFini = new List<Reservation>();
-            List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
-            List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
-            foreach (Reservation r in lesReserv)
+            List<int> listInt = new List<int>();
+            DataTable rowInt = this.mydbal.SelectAllIdReserv();
+            foreach (DataRow r in rowInt.Rows)
             {
-                foreach (Transaction t in lesTransac) 
-                {
-                    if (t.Reservation.Id == r.Id)
-                    {
-                        pasFini.Add(r);
-                    }
-                }
+                listInt.Add((int) r["reservation"]);
             }
-            return pasFini;
+            return listInt;
         }
 
-        //public bool TestCreditMontant(Client uncli, int Montant)
-        //{
-        //    if ()
-        //        if (Montant > uncli.Credit)
-        //        {
-
-        //        }
-        //}
-        public void Insert(Transaction uneTransac)
+        public bool TestCreditMontant(int credit, int montant)
         {
-            int id = ReturnnextId();
-            string query = "Transaction (id, operation, montant, reservation, idclient) VALUES ("
-                + id + ",'"
-                + uneTransac.Operation + "',"
-                + uneTransac.Montant + ","
-                + uneTransac.Reservation.Id + ","
-                + uneTransac.IdClient.Id + ")";
+            bool test = true;
+                if (montant > credit)
+                {
+                    test = false;
+                }
+            return test;
+        }
+
+        
+        public void InsertTransaction(Transaction uneTransac)
+        {
+                int id = ReturnnextId();
+                string query = "Transactions (id, operation, montant, reservation, idclient, dateTransac) VALUES ("
+                    + id + ",'"
+                    + uneTransac.Operation + "',"
+                    + uneTransac.Montant + ","
+                    + uneTransac.Reservation.Id + ","
+                    + uneTransac.IdClient.Id + ",'"
+                    + uneTransac.DateTransac + "')";
+          
+            
             this.mydbal.Insert(query);
-        }
-
-        public void Update(Transaction uneTransac)
-        {
-            string query = "Transaction set id = " + uneTransac.Id
-                + ", operation = '" + uneTransac.Operation
-                + ", montant = " + uneTransac.Montant
-                + ", reservation = " + uneTransac.Reservation.Id
-                + ", idClient = " + uneTransac.IdClient.Id + ")";
-            this.mydbal.Update(query);
-        }
-
-        public void Delete(Transaction uneTransac)
-        {
-            string query = "Transaction Where id = " + uneTransac.Id + ")";
-            this.mydbal.Delete(query);
         }
 
         public List<Transaction> SelectAll()

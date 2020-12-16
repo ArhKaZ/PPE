@@ -104,17 +104,7 @@ namespace PPE.viewModel
             }
         }
 
-        public ICommand UpdateCommand
-        {
-            get
-            {
-                if (this.updateCommand == null)
-                {
-                    this.updateCommand = new RelayCommand(() => UpdateTransac(), () => true);
-                }
-                return this.updateCommand;
-            }
-        }
+       
         public bool[] ModeArray
         {
             get { return _modeArray; }
@@ -124,14 +114,5 @@ namespace PPE.viewModel
             get { return Array.IndexOf(_modeArray, true); }
         }
 
-        public void UpdateTransac()
-        {
-            Transaction Transactionsauv = new Transaction();
-            vmDaoTransaction.Update(Transaction);
-            int index = listTransaction.IndexOf(Transaction);
-            listTransaction.Insert(index, Transaction);
-            listTransaction.RemoveAt(index + 1);
-            Transaction = Transactionsauv;
-        }
     }
 }

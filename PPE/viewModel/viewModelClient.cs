@@ -46,7 +46,7 @@ namespace PPE.viewModel
         public viewModelClient(DaoClient theDaoClient)
         {
             vmDaoClient = theDaoClient;
-            listClient = new ObservableCollection<Client>(theDaoClient.SelectAll());
+            listClient = new ObservableCollection<Client>(vmDaoClient.SelectAll());
         }
 
         public string Nom

@@ -156,5 +156,13 @@ namespace ModelLayer.Data
             DataSet dataset = RQuery(query);
             return dataset.Tables[0].Rows[0];
         }
+
+        public DataTable SelectAllIdReserv()
+        {
+            string query = "SELECT reservation FROM Transactions";
+            DataSet dataset = RQuery(query);
+
+            return dataset.Tables[0];
+        }
     }
 }

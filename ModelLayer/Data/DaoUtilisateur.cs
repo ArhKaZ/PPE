@@ -40,7 +40,7 @@ namespace ModelLayer.Data
 
         public void Update(Utilisateur unUser)
         {
-            string query = "Utilisateur Set id= " + unUser.Id 
+            string query = "Utilisateur Set id= " + unUser.Id
                 + ", role = '" + unUser.Role
                 + ", ville = " + unUser.Ville.Id
                 + ", identifiant = '" + unUser.Identifiant.Replace("'", "''")
@@ -64,7 +64,7 @@ namespace ModelLayer.Data
                 Ville maVille = this.theDaoVille.SelectbyId((int)r["idVille"]);
                 listUtilisateur.Add(new Utilisateur(
                     (int)r["id"],
-                    (char)r["role"],
+                    (string)r["roleUser"],
                     maVille,
                     (string)r["identifiant"],
                     (string)r["mdp"]));
@@ -77,10 +77,10 @@ namespace ModelLayer.Data
             DataRow rowUtilisateur = this.mydbal.SelectById("utilisateur", id);
             Ville maVille = this.theDaoVille.SelectbyId((int)rowUtilisateur["idVille"]);
             return new Utilisateur((int)rowUtilisateur["id"],
-                (char)rowUtilisateur["role"],
+                (string)rowUtilisateur["roleUser"],
                 maVille,
                 (string)rowUtilisateur["identifiant"],
-                (string)rowUtilisateur["mdp"]); 
+                (string)rowUtilisateur["mdp"]);
         }
     }
 }

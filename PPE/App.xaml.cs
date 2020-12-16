@@ -29,17 +29,20 @@ namespace PPE
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             mydbal = new Dbal("escp_Game");
-            theDaoAvis = new DaoAvis(mydbal, theDaoClient, theDaoTheme);
+           
             theDaoClient = new DaoClient(mydbal);
-            theDaoObstacle = new DaoObstacle(mydbal, theDaoTheme);
-            theDaoPObstacle = new DaoPlacement_Obst(mydbal, theDaoReservation, theDaoObstacle);
-            theDaoReservation = new DaoReservation(mydbal, theDaoClient, theDaoSalle, theDaoUtilisateur, theDaoTheme);
-            theDaoSalle = new DaoSalle(mydbal, theDaoVille, theDaoTheme);
             theDaoTheme = new DaoTheme(mydbal);
-            theDaoTransaction = new DaoTransaction(mydbal, theDaoClient, theDaoReservation);
-            theDaoUtilisateur = new DaoUtilisateur(mydbal, theDaoVille);
             theDaoVille = new DaoVille(mydbal);
-
+            theDaoAvis = new DaoAvis(mydbal, theDaoClient, theDaoTheme);
+            theDaoObstacle = new DaoObstacle(mydbal, theDaoTheme);
+            theDaoSalle = new DaoSalle(mydbal, theDaoVille, theDaoTheme);
+            
+          
+            
+            theDaoUtilisateur = new DaoUtilisateur(mydbal, theDaoVille);
+            theDaoReservation = new DaoReservation(mydbal, theDaoClient, theDaoSalle, theDaoUtilisateur, theDaoTheme);
+            theDaoTransaction = new DaoTransaction(mydbal, theDaoClient, theDaoReservation);
+            theDaoPObstacle = new DaoPlacement_Obst(mydbal, theDaoReservation, theDaoObstacle);
             MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoUtilisateur, theDaoVille);
             wnd.Show();
         }
