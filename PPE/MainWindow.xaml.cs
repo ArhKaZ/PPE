@@ -30,9 +30,9 @@ namespace PPE
             Grid_Clients.DataContext = new viewModelClient(theDaoClient);
             Grid_Credits.DataContext = new viewModelCredits(theDaoClient, theDaoTransaction, theDaoSalle, theDaoReservation, theDaoUtilisateur);
 
-            //Grid_Transac.DataContext = new viewModelTransactions(theDaoTransaction); ;
+            Grid_Transac.DataContext = new viewModelTransactions(theDaoTransaction, theDaoClient, theDaoReservation) ; ;
         }
 
-       
+        
     }
 }

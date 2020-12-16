@@ -21,6 +21,7 @@ namespace PPE.viewModel
         private DaoUtilisateur vmDaoUtilisateur;
         private ICommand insertCommand;
         private ICommand searchCommand;
+        private ICommand refreshCommand;
         private ObservableCollection<Client> listClient;
         private ObservableCollection<Transaction> listTransaction;
         private Client leCli = new Client();
@@ -143,6 +144,7 @@ namespace PPE.viewModel
             listClient = new ObservableCollection<Client>(theDaoClient.SelectAll());
             listTransaction = new ObservableCollection<Transaction>(theDaoTransac.SelectAll());
             listReservationAF = new ObservableCollection<Reservation>(LesReservSansTransac(vmDaoReservation, vmDaoTransaction));
+            RefreshListCli();
         }
 
         public ICommand Valider
@@ -161,14 +163,16 @@ namespace PPE.viewModel
         {
             
             bool testi = true;
+            DateTime mondt = new DateTime();
+            mondt = DateTime.Now;
             int id = vmDaoTransaction.ReturnnextId();
-            Transaction maTransac = new Transaction(0, Operation, Montant, 1, Client);
+            Transaction maTransac = new Transaction(0, Operation, Montant, ReservChoix, Client);
             if (ModeArray[0] == true)
             {
                 maTransac.Id = id;
                 maTransac.Operation = "C";
-                maTransac.DateTransac = DateTime.Now;
-                
+                maTransac.DateTransac = mondt;
+                maTransac.Reservation = vmDaoReservation.SelectbyId(1);
                 
             }
             if (ModeArray[1] == true)
@@ -182,13 +186,22 @@ namespace PPE.viewModel
                     maTransac.Operation = "D";
                     maTransac.Reservation = ReservChoix;
                     maTransac.DateTransac = DateTime.Now;
-                    vmDaoTransaction.InsertTransaction(maTransac);
+                    
                 }
-  
-                
+            }
+            vmDaoTransaction.InsertTransaction(maTransac);
+        }
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                if (this.refreshCommand == null)
+                {
+                    this.refreshCommand = new RelayCommand(() => RefreshListCli(), () => true);
+                }
+                return this.refreshCommand;
             }
         }
-
         public ICommand SearchCommand
         {
             get
