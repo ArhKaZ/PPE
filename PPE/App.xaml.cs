@@ -43,9 +43,7 @@ namespace PPE
             theDaoReservation = new DaoReservation(mydbal, theDaoClient, theDaoSalle, theDaoUtilisateur, theDaoTheme);
             theDaoTransaction = new DaoTransaction(mydbal, theDaoClient, theDaoReservation);
             theDaoPObstacle = new DaoPlacement_Obst(mydbal, theDaoReservation, theDaoObstacle);
-            MainWindow wnd = new MainWindow(theDaoClient, theDaoReservation, theDaoSalle, theDaoTransaction, theDaoUtilisateur);
-            //Connexion conn = new Connexion(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoUtilisateur, theDaoVille);
-
+            MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoUtilisateur, theDaoVille);
             wnd.Show();
         }
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

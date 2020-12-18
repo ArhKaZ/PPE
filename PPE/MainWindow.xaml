@@ -47,7 +47,7 @@
                     <TextBlock x:Name="Txt_Def15" Grid.Column="6" Grid.Row="2" Height="30" Width="100" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="123,10,123,60" Text="Téléphone : "/>
                     <TextBox x:Name="Txt_Telephone" Grid.Column="6" Grid.Row="2" Height="40" Width="200" Text="{Binding Telephone}" Background="#FFD3E9F7" VerticalAlignment="Top" Margin="73,50,73,0" HorizontalAlignment="Stretch"  />
                     <TextBlock x:Name="Txt_Def16" Grid.Column="4" Grid.Row="4" Height="30" Width="60" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="144,10,143,60" Text="Mail : "/>
-                    <TextBox x:Name="Txt_Mail" Grid.Column="4" Grid.Row="4" Text="{Binding Mail}" Height="40" Width="250" Background="#FFD3E9F7" VerticalAlignment="Top" Margin="54,45,43,0" HorizontalAlignment="Stretch"  />
+                    <TextBox x:Name="Txt_Mail" Grid.Column="4" Grid.Row="4" Text="{Binding Mail}" Height="40" Width="200" Background="#FFD3E9F7" VerticalAlignment="Top" Margin="74,50,73,0" HorizontalAlignment="Stretch"  />
                     <TextBlock x:Name="Txt_Def17" Grid.Column="5" Grid.Row="4" Height="30" Width="60" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="143,10,144,60" Text="Crédit : "/>
                     <TextBox x:Name="Txt_Credit" Grid.Column="5" Grid.Row="4" Height="40" Text="{Binding Credit}" Width="200" Background="#FFD3E9F7" VerticalAlignment="Top" Margin="73,50,74,0" HorizontalAlignment="Stretch"  />
                     <TextBlock x:Name="Txt_Def18" Grid.Column="6" Grid.Row="4" Height="30" Width="170" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="88,10,88,60" Text="Date de naissance : "/>

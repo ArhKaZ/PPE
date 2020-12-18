@@ -110,8 +110,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connexion.xaml.cs">
+      <DependentUpon>Connexion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="viewModel\RelayCommand.cs" />
     <Compile Include="viewModel\viewModelBase.cs" />
+    <Compile Include="viewModel\viewModelClient.cs" />
     <Compile Include="viewModel\viewModelCredits.cs" />
     <Compile Include="viewModel\viewModelTransactions.cs" />
     <Page Include="Connexion.xaml">
