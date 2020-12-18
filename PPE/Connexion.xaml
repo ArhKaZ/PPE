@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPE"
         mc:Ignorable="d"
-        Title="Connexion" Height="450" Width="800">
-    <Grid>
-        
+        Title="Connexion" Height="272" Width="437">
+    <Grid x:Name="Grid_Connexion">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Label Content="CONNEXION" HorizontalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+        <TextBox Grid.ColumnSpan="2" Text="{Binding Login}"  Grid.Column="1" HorizontalAlignment="Center" Height="23"  Grid.Row="1" TextWrapping="Wrap"  Width="128"/>
+        <TextBox Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding Mdp}" HorizontalAlignment="Center" Height="23"  Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" Width="128" Margin="43,10,43,64"/>
+        <Label Content="Login : " HorizontalAlignment="Center" Margin="58,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="49" Grid.Column="1" Grid.ColumnSpan="1"/>
+        <Label Content="Mot de passe : " HorizontalAlignment="Center" Margin="58,78,64,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button Grid.ColumnSpan="2" Content="Se Connecter" Command="{Binding Connexion}" Grid.Column="1" HorizontalAlignment="Left" Margin="68,67,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>
