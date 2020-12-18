@@ -29,7 +29,7 @@ namespace ModelLayer.Data
 
         public int ReturnnextId()
         {
-            DataRow myRow = mydbal.SelectLastId("Reservation");
+            DataRow myRow = mydbal.SelectLastId("transactions");
             return (int)myRow["id"] + 1;
         }
         
@@ -54,7 +54,8 @@ namespace ModelLayer.Data
                 }
             return test;
         }
-
+        //Tout marche il faut seulement finir les ajustements et afficher la date dans le dp de 
+        //Transaction
         
         public void InsertTransaction(Transaction uneTransac)
         {
@@ -65,12 +66,12 @@ namespace ModelLayer.Data
                     + uneTransac.Montant + ","
                     + uneTransac.Reservation.Id + ","
                     + uneTransac.IdClient.Id + ",'"
-                    + uneTransac.DateTransac + "')";
+                    + uneTransac.DateTransac.ToString("yyyy-MM-dd") + "')";
           
             
             this.mydbal.Insert(query);
         }
-
+        
         public List<Transaction> SelectAll()
         {
             List<Transaction> listTransaction = new List<Transaction>();
@@ -78,13 +79,55 @@ namespace ModelLayer.Data
 
             foreach (DataRow r in rowTransaction.Rows)
             {
+                
                 Client unCli = this.theDaoClient.SelectById((int)r["idClient"]);
-                Reservation uneReserv = this.theDaoReservation.SelectbyId((int)r["Reservation"]);
-                listTransaction.Add(new Transaction((int)r["id"], (string)r["operation"], (int)r["montant"], uneReserv, unCli));
+                Reservation uneReserv = this.theDaoReservation.SelectbyId(1);
+                Transaction temp = new Transaction((int)r["id"], (string)r["operation"], (int)r["montant"], uneReserv, unCli, (DateTime)r["dateTransac"]) ;
+                if (temp.Operation == "D")
+                {
+                    temp.Reservation = this.theDaoReservation.SelectbyId((int)r["reservation"]);
+                    listTransaction.Add(temp);
+                }
+                else
+                {
+                    listTransaction.Add(temp);
+                }
+                
+                 
+            }
+            return listTransaction;
+        }
+        public List<Transaction> SelectAllSauf()
+        {
+            List<Transaction> listTransaction = new List<Transaction>();
+            DataTable rowTransaction = this.mydbal.SelectAllSauf("transactions", 1);
+
+            foreach (DataRow r in rowTransaction.Rows)
+            {
+
+                Client unCli = this.theDaoClient.SelectById((int)r["idClient"]);
+                Reservation uneReserv = this.theDaoReservation.SelectbyId(1);
+                Transaction temp = new Transaction((int)r["id"], (string)r["operation"], (int)r["montant"], uneReserv, unCli, (DateTime)r["dateTransac"]);
+                if (temp.Operation == "D")
+                {
+                    temp.Reservation = this.theDaoReservation.SelectbyId((int)r["reservation"]);
+                    listTransaction.Add(temp);
+                }
+                else
+                {
+                    listTransaction.Add(temp);
+                }
+
+
             }
             return listTransaction;
         }
 
+        //public DateTime SelectDtFromIdReserv(int id)
+        //{
+        //    DataRow rowDate = this.mydbal.SelectDate("dateTransac", "transactions", "reservation", id);
+        //    return new DateTime((DateTime)rowDate["dateTransac"]);
+        //}
         public Transaction SelectById(int id)
         {
             DataRow rowTransaction = this.mydbal.SelectById("transactions", id);
@@ -94,7 +137,16 @@ namespace ModelLayer.Data
                 (string)rowTransaction["operation"],
                 (int)rowTransaction["montant"],
                 uneResevation,
-                unCli);
+                unCli,
+                (DateTime)rowTransaction["dateTransac"]);
         }
+
+        //public Client SelectlistById(int id)
+        //{
+        //    string search = "id = '" + id + "'";
+
+        //    DataTable tableClient = this.mydbal.SelectByField("Clients", search);
+        //    return new Client((int)tableClient.Rows[0]["id"], (string)tableClient.Rows[0]["nom"], (string)tableClient.Rows[0]["prenom"], (int)tableClient.Rows[0]["telephone"], (string)tableClient.Rows[0]["mail"], (int)tableClient.Rows[0]["credit"], (DateTime)tableClient.Rows[0]["dateNaissance"], (int)tableClient.Rows[0]["NbPartie"]);
+        //}
     }
 }

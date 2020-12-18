@@ -25,7 +25,7 @@ namespace ModelLayer.Data
         {
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + "; convert zero datetime=True " ;
 
             connection = new MySqlConnection(connectionString);
         }
@@ -133,7 +133,15 @@ namespace ModelLayer.Data
 
             return dataset.Tables[0];
         }
+        public DataTable SelectAllSauf(string table, int id)
+        {
+            string query = "SELECT * FROM " + table + " WHERE Id != " + id;
+            DataSet dataset = RQuery(query);
 
+            return dataset.Tables[0];
+        }
+
+       
         public DataTable SelectByField(string table, string fieldTestCondition)
         {
             string query = "SELECT * FROM " + table + " where " + fieldTestCondition;
@@ -141,7 +149,14 @@ namespace ModelLayer.Data
 
             return dataset.Tables[0];
         }
+        public DataRow SelectDate(string NomVariableDate, string table, string IdTest, int id)
+        {
+            string query = "SELECT " + NomVariableDate + "FROM " + table + "WHERE " + IdTest + " = " + id;
+            DataSet dataset = RQuery(query);
+            return dataset.Tables[0].Rows[0];
+        } 
 
+  
         public DataRow SelectById(string table, int id)
         {
             string query = "SELECT * FROM " + table + " where id='" + id + "'";

@@ -91,7 +91,6 @@ namespace ModelLayer.Data
             + "', NbPartie =" + myCLient.Nbpartie
             + " Where id = " + myCLient.Id;
             this.theDbal.Update(query);
-
         }
 
 
@@ -100,6 +99,20 @@ namespace ModelLayer.Data
             List<Client> listClient = new List<Client>();
 
             DataTable myTable = this.theDbal.SelectAll("Clients");
+
+            foreach (DataRow r in myTable.Rows)
+
+            {
+                listClient.Add(new Client((int)r["id"], (string)r["nom"], (string)r["prenom"], (int)r["telephone"], (string)r["mail"], (int)r["credit"], (DateTime)r["dateNaissance"], (int)r["NbPartie"]));
+            }
+            return listClient;
+        }
+
+        public List<Client> SelectAllSauf()
+        {
+            List<Client> listClient = new List<Client>();
+
+            DataTable myTable = this.theDbal.SelectAllSauf("Clients", 1);
 
             foreach (DataRow r in myTable.Rows)
 

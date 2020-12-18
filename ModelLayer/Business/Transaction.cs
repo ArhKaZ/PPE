@@ -14,14 +14,14 @@ namespace ModelLayer.Business
         private Reservation reservation;
         private Client idClient;
         private DateTime dateTransac;
-        public Transaction(int id, string operation, int montant, Reservation reservation, Client idClient)
+        public Transaction(int id, string operation, int montant, Reservation reservation, Client idClient, DateTime date) // Rajouter une date
         {
             Id = id;
             Operation = operation;
             Montant = montant;
             Reservation = reservation;
             IdClient = idClient;
-            DateTransac = DateTime.Now;
+            DateTransac = date;
         }
 
         //public Transaction(int id, string operation, int montant, Reservation reservation, Client idClient)
@@ -34,16 +34,6 @@ namespace ModelLayer.Business
         //    DateTransac = DateTime.Now;
         //}
 
-        public Transaction(int id, string operation, int montant, Client idClient, DateTime date)
-        {
-            Id = id;
-            Operation = operation;
-            Montant = montant;
-            Reservation = reservation;
-            IdClient = idClient;
-            DateTransac = date;
-        }
-
         public Transaction() { }
 
         public int Id { get => id ; set => id = value; }
@@ -54,7 +44,7 @@ namespace ModelLayer.Business
         public DateTime DateTransac { get => dateTransac; set => dateTransac = value; }
         public override string ToString()
         {
-            return this.DateTransac + "-- numero = " + this.Id;
+            return this.DateTransac.ToString("yyyy-MM-dd") + "-- numero = " + this.Id;
         }
     }
 }

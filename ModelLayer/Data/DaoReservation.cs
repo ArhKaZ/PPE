@@ -49,14 +49,14 @@ namespace ModelLayer.Data
 
         public void Update(Reservation uneReservation)
         {
-            string query = "Salle Set id= '" + uneReservation.DateRes
-                + "', id = " + uneReservation.Id
+            string query = "Salle Set dateRes ='" + uneReservation.DateRes
                 + ", idClient = " + uneReservation.IdClient.Id
                 + ", idSalle = " + uneReservation.IdSalle.Id
                 + ", prix = " + uneReservation.Prix
                 + ", idTechnicien = " + uneReservation.IdTechnicien.Id
                 + ", nbClient = " + uneReservation.NbClient
-                + ", idTheme = " + uneReservation.IdTheme + ")";
+                + ", idTheme = " + uneReservation.IdTheme 
+                +" Where id = " + uneReservation.Id + ")";
             this.mydbal.Update(query);
         }
 
@@ -83,6 +83,29 @@ namespace ModelLayer.Data
                 unTheme);
         }
 
+        public List<Reservation> SearchReservClient(int name)
+        {
+            List<Reservation> listReservation = new List<Reservation>();    
+            string search = "idClient = '" + name + "'";
+
+            DataTable tableReserv = this.mydbal.SelectByField("Reservation", search);
+            foreach (DataRow r in tableReserv.Rows)
+            { 
+                Client unCli = this.theDaoClient.SelectById((int)r["idClient"]);
+            Salle uneSalle = this.theDaoSalle.SelectById((int)r["idSalle"]);
+            Utilisateur unUtilisateur = this.theDaoUtilisateur.SelectbyId((int)r["idTechnicien"]);
+            Theme unTheme = this.theDaoTheme.SelectById((int)r["idTheme"]);
+            listReservation.Add(new Reservation((DateTime)r["dateRes"],
+            (int)r["id"],
+            unCli,
+            uneSalle,
+            (int)r["prix"],
+            unUtilisateur,
+            (int)r["nbClient"],
+            unTheme));
+        }
+            return listReservation;
+        }
         public List<Reservation> SelectAll()
         {
             List<Reservation> listReservation = new List<Reservation>();

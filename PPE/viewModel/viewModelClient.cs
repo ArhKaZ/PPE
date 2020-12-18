@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -46,14 +47,14 @@ namespace PPE.viewModel
         public viewModelClient(DaoClient theDaoClient)
         {
             vmDaoClient = theDaoClient;
-            listClient = new ObservableCollection<Client>(vmDaoClient.SelectAll());
+            listClient = new ObservableCollection<Client>(vmDaoClient.SelectAllSauf());
         }
 
         public string Nom
         {
 
             get
-            {
+            { //RAJOUTE UN BTN POUR REFRESH
                 if (leCli != null)
                 {
                     return leCli.Nom;
@@ -248,7 +249,7 @@ namespace PPE.viewModel
 
         public void RefreshListCli()
         {
-            ObservableCollection<Client> lalistClient = new ObservableCollection<Client>(vmDaoClient.SelectAll());
+            ObservableCollection<Client> lalistClient = new ObservableCollection<Client>(vmDaoClient.SelectAllSauf());
             listClient.Clear();
             foreach (Client c in lalistClient)
             {
@@ -311,15 +312,17 @@ namespace PPE.viewModel
         private void UpdateClient()
         {
 
-            vmDaoClient.Update(Client);
+            vmDaoClient.Update(leCli);
             RefreshListCli();
+            MessageBox.Show("Votre client est modifier", "Confirmation modification client", MessageBoxButton.OK);
         }
 
-        private void InsertClient()
+        private void InsertClient() //Ajouter lien avec listclient du 2nd onglet
         {
-            vmDaoClient.Insert(Client);
+            leCli.Credit = 0;
+            vmDaoClient.Insert(leCli);
             RefreshListCli();
-            //listClient.Add(Client);
+            MessageBox.Show("Votre client est ajouté", "Confirmation nouveau client", MessageBoxButton.OK);
         }
 
         private void DeleteClient()
@@ -328,6 +331,7 @@ namespace PPE.viewModel
             vmDaoClient.Delete(leCli);
             //listClient.Remove(Client);
             RefreshListCli();
+            MessageBox.Show("Votre client est supprimmer", "Confirmation suppression client", MessageBoxButton.OK);
         }
 
 
