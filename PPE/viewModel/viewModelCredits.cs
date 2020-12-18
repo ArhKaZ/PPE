@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -250,6 +251,7 @@ namespace PPE.viewModel
                 maTransac.IdClient.Credit = maTransac.IdClient.Credit + maTransac.Montant;
                 vmDaoClient.Update(maTransac.IdClient);
                 OnPropertyChanged("Credit");
+                MessageBox.Show("Votre client est crédité", "Confirmation crédit client", MessageBoxButton.OK);
             }
             if (ModeArray[1] == true)
             {
@@ -265,6 +267,7 @@ namespace PPE.viewModel
                     maTransac.IdClient.Credit = maTransac.IdClient.Credit - reservChoix.Prix;
                     vmDaoClient.Update(maTransac.IdClient);
                     OnPropertyChanged("Credit");
+                    MessageBox.Show("Votre client est débité", "Confirmation débit client", MessageBoxButton.OK);
                 }
             }
             vmDaoTransaction.InsertTransaction(maTransac);
@@ -274,6 +277,7 @@ namespace PPE.viewModel
             {
                 listReservationAF.Add(r);
             }
+           
         }
         public ICommand RefreshCommand
         {
