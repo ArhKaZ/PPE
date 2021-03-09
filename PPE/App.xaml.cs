@@ -43,13 +43,23 @@ namespace PPE
             theDaoReservation = new DaoReservation(mydbal, theDaoClient, theDaoSalle, theDaoUtilisateur, theDaoTheme);
             theDaoTransaction = new DaoTransaction(mydbal, theDaoClient, theDaoReservation);
             theDaoPObstacle = new DaoPlacement_Obst(mydbal, theDaoReservation, theDaoObstacle);
-            MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoUtilisateur, theDaoVille);
-            wnd.Show();
+          //  Connexion wndCx = new Connexion(theDaoUtilisateur);
+            wndCx.Show();
+            //if (this.wndCx.)
+          //  {
+            //    wnd.Hide();
+          //  }
         }
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             MessageBox.Show("An unhandled exception just occurred: " + e.Exception.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
             e.Handled = true;
         }
+
+       // public static bool IsWindowOpen<T>(string name = "") where T : Connexion
+       // {
+       //     return string.IsNullOrEmpty(name)
+             //   ? Application.Current.Windows.OfType<T>.Any();
+       // }
     }
 }

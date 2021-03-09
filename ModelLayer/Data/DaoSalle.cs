@@ -73,5 +73,18 @@ namespace ModelLayer.Data
             Theme monTheme = this.theDaoTheme.SelectById((int)rowSalle["idTheme"]);
             return new Salle((int)rowSalle["id"], maVille, monTheme);
         }
+
+        public List<Salle> SelectLesbonnesSalle(int idville)
+        {
+            List<Salle> listSalle = new List<Salle>();
+            DataTable myTable = this.mydbal.SelectSalle(idville);
+            foreach (DataRow s in myTable.Rows)
+            {
+                Ville maVille = this.theDaoVille.SelectbyId((int)s["idLieu"]);
+                Theme monTheme = this.theDaoTheme.SelectById((int)s["idTheme"]);
+                listSalle.Add(new Salle((int)s["id"], maVille, monTheme));
+            }
+            return listSalle;
+        }
     }
 }

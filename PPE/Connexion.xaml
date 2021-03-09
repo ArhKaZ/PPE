@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPE"
         mc:Ignorable="d"
+        x:Name="ConnexionWindow"
         Title="Connexion" Height="450" Width="800">
-    <Grid>
-        
+    <Grid x:Name="Grid_connexion">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Txt_Titre" Grid.Column="1" Grid.Row="0"  Text="SE CONNECTER" Margin="26,30,24,27" FontSize="30"/>
+        <TextBlock x:Name="Txt_Def1" Grid.Column="1" Grid.Row="1" Height="30"  Text="Utilisateur : " Margin="64,45,112,30"/>
+        <TextBox x:Name="Txt_login" Background="#FFD3E9F7" Text="{Binding Identifiant}" Grid.Column="1" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="113" Height="25" Margin="64,0,87,0"/>
+        <TextBlock x:Name="Txt_Def2" Grid.Column="1" Grid.Row="2" Height="30"  Text="Mot de passe : " Margin="64,50,112,25"/>
+        <TextBox x:Name="Txt_pwd" Background="#FFD3E9F7" Text="{Binding Mdp}" Grid.Column="1" Grid.Row="2"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="113" Height="25" Margin="64,0,87,0"/>
+        <Button Content="Connexion" Grid.Column="1" Command="{Binding ConnexionCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=ConnexionWindow}" Margin="82,47,112,30" Grid.Row="3"  Width="70"/>
+
+
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ namespace ModelLayer.Data
 
 
         //Constructor
-        public Dbal(string database, string uid = "root", string password = "", string server = "localhost")
+        public Dbal(string database, string uid = "root", string password = "root", string server = "localhost")
         {
             Initialize(database, uid, password, server);
         }
@@ -177,6 +177,13 @@ namespace ModelLayer.Data
             string query = "SELECT reservation FROM Transactions";
             DataSet dataset = RQuery(query);
 
+            return dataset.Tables[0];
+        }
+
+        public DataTable SelectSalle(int idville)
+        {
+            string query = "SELECT * FROM Salle WHERE idlieu = " + idville;
+            DataSet dataset = RQuery(query);
             return dataset.Tables[0];
         }
     }

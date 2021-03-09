@@ -15,13 +15,16 @@ namespace PPE.viewModel
     class viewModelClient : viewModelBase
     {
         private DaoClient vmDaoClient;
+        private DaoSalle vmDaoSalle;
+
         private ICommand insertCommand;
         private ICommand updateCommand;
         private ICommand deleteCommand;
         private ICommand searchCommand;
+        
         private ObservableCollection<Client> listClient;
         private Client leCli = new Client();
-
+        private List<Salle> listsalle = new List<Salle>();
         public string Recherche { get; set; }
         public ObservableCollection<Client> ListClient { get => listClient; set => listClient = value; }
         public Client Client
@@ -54,7 +57,7 @@ namespace PPE.viewModel
         {
 
             get
-            { //RAJOUTE UN BTN POUR REFRESH
+            { 
                 if (leCli != null)
                 {
                     return leCli.Nom;
@@ -323,6 +326,7 @@ namespace PPE.viewModel
             vmDaoClient.Insert(leCli);
             RefreshListCli();
             MessageBox.Show("Votre client est ajouté", "Confirmation nouveau client", MessageBoxButton.OK);
+
         }
 
         private void DeleteClient()
