@@ -15,7 +15,7 @@ namespace ModelLayer.Data
 
 
         //Constructor
-        public Dbal(string database, string uid = "root", string password = "5MichelAnnecy", string server = "localhost")
+        public Dbal(string database, string uid = "root", string password = "360LAplakette", string server = "localhost")
         {
             Initialize(database, uid, password, server);
         }
@@ -121,10 +121,10 @@ namespace ModelLayer.Data
         //Select statement
         public DataTable SelectAll(string table)
         {
+
             string query = "SELECT * FROM " + table;
             DataSet dataset = RQuery(query);
-
-            return dataset.Tables[0];
+                return dataset.Tables[0];
         }
 
         public DataTable SelectByField(string table, string fieldTestCondition)

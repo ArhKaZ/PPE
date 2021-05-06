@@ -105,28 +105,28 @@ namespace PPE.viewModel
             
         }
 
-        //public ICommand Valider
-        //{
-        //    get
-        //    {
-        //        if (this.insertCommand == null)
-        //        {
-        //            this.insertCommand = new RelayCommand(() => InsertTransac(), () => true);
-        //        }
-        //        return this.insertCommand;
-        //    }
-        //}
+        public ICommand Valider
+        {
+            get
+            {
+                if (this.insertCommand == null)
+                {
+                    this.insertCommand = new RelayCommand(() => InsertTransac(), () => true);
+               }
+               return this.insertCommand;
+            }
+        }
 
         private void InsertTransac()
         {
             int id = vmDaoTransaction.ReturnnextId();
-            Transaction maTransac = new Transaction(id, Operation, Montant, leCli.);
-            vmDaoTransaction.Insert(Client);
-            foreach (Client c in listClient)
-            {
-                idf = idf + 1;
-            }
-            listClient.Add(Client);
+            Transaction maTransac = new Transaction(id, Operation, Montant, leCli);
+            vmDaoTransaction.Insert(maTransac);
+           // foreach (Client c in listClient)
+           // {
+            //    idf = idf + 1;
+           // }
+           // listClient.Add(Client);
         }
     }
 }

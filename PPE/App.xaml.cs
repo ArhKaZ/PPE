@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ModelLayer.Business;
 using ModelLayer.Data;
+using PPE.viewModel;
 namespace PPE
 {
     /// <summary>
@@ -39,8 +40,11 @@ namespace PPE
             theDaoTransaction = new DaoTransaction(mydbal, theDaoClient, theDaoReservation);
             theDaoUtilisateur = new DaoUtilisateur(mydbal, theDaoVille);
             theDaoVille = new DaoVille(mydbal);
-
-            MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoUtilisateur, theDaoVille);
+            //Connexion wndco = new Connexion(theDaoUtilisateur);
+            //viewModelConnexion vmUser = new viewModelConnexion(theDaoUtilisateur);
+            //wndco.Show();
+           
+            MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoVille);
             wnd.Show();
         }
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

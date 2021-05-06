@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ModelLayer.Business;
-using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
+
 using System.Data;
 using System.Runtime.CompilerServices;
 using System.IO;
-using CsvHelper;
 using System.Globalization;
 namespace ModelLayer.Data
 {
@@ -33,15 +31,15 @@ namespace ModelLayer.Data
             return (int)myRow["id"] + 1;
         }
 
-        public List<Reservation> LesReservSansTransac()
-        {
-            List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
-            List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
-            foreach (Transaction t in lesTransac)
-            {
-                // Test pour savoir si une transac existe pour une reservation
-            }
-        }
+        //public List<Reservation> LesReservSansTransac()
+        //{
+        //    List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
+        //    List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
+        //    foreach (Transaction t in lesTransac)
+        //    {
+        //        // Test pour savoir si une transac existe pour une reservation
+        //    }
+        //}
         //public bool TestCreditMontant(Client uncli,int Montant)
         //{
         //    if ()

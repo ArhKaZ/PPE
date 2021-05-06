@@ -23,7 +23,7 @@ namespace PPE
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(DaoAvis theDaoAvis,DaoClient theDaoClient ,DaoObstacle theDaoObstacle,DaoPlacement_Obst theDaoPObstacle,DaoReservation theDaoReservation,DaoSalle theDaoSalle,DaoTheme theDaoTheme,DaoTransaction theDaoTransaction,DaoUtilisateur theDaoUtilisateur,DaoVille theDaoVille )
+        public MainWindow(DaoAvis theDaoAvis,DaoClient theDaoClient ,DaoObstacle theDaoObstacle,DaoPlacement_Obst theDaoPObstacle,DaoReservation theDaoReservation,DaoSalle theDaoSalle,DaoTheme theDaoTheme,DaoTransaction theDaoTransaction,DaoVille theDaoVille )
         {
             //Finir le tuto : https://www.c-sharpcorner.com/UploadFile/mahesh/datagrid-in-wpf/#:~:text=WPF%20DataGrid.,display%20data%20from%20a%20collection.&text=In%20this%20article%2C%20you%20will,load%20data%20from%20a%20collection
             InitializeComponent();
