@@ -130,9 +130,9 @@ insert into Ville VALUES (1, "Annecy");
 insert into Ville VALUES (2, "Chamonix");
 insert into Ville VALUES (3, "Thonon-les-bains");
 
-insert into Utilisateur values (1, "admin", 1, "...", "...");
-insert into Utilisateur values (2, "reposable", 2, "...", "...");
-insert into Utilisateur values (3, "client", 3, "...", "...");
+insert into Utilisateur values (1, "admin", 1, "random", "random123");
+insert into Utilisateur values (2, "respon", 2, "Patoche24", "sisi234");
+insert into Utilisateur values (3, "secret", 3, "SLuiset", "123456");
 
 insert into Salle values (1,1,1);
 insert into Salle values (2,2,2);
