@@ -35,6 +35,7 @@ namespace PPE
             vmDaoClient = theDaoClient;
             vmDaoTransac = theDaoTransaction;
             InitializeComponent();
+            
         }
 
         private void Btn_co_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,7 @@ namespace PPE
            
             foreach (Utilisateur u in listUser)
             {
+               
                 if (u.Identifiant == unUser.Identifiant)
                 {
                     if (u.Mdp == unUser.Mdp)
@@ -53,8 +55,12 @@ namespace PPE
                     
                 }
                 
+                
             }
-            
+            if (this.IsActive == true)
+            {
+                MessageBox.Show("Vos identifians ne sont pas bon");
+            }
         }
 
         private void WndConnexion_Closing(object sender, System.ComponentModel.CancelEventArgs e)

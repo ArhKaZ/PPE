@@ -83,7 +83,7 @@ namespace ModelLayer.Data
         public List<Reservation> SelectAll()
         {
             List<Reservation> listUtilisateur = new List<Reservation>();
-            DataTable myTable = this.mydbal.SelectAll("Utilisateur");
+            DataTable myTable = this.mydbal.SelectAll("Reservation");
 
             foreach (DataRow r in myTable.Rows)
             {

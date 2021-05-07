@@ -68,6 +68,7 @@ namespace PPE.viewModel
             }
         }
 
+        
         public int Credit
         {
             get => leCli.Credit;
@@ -97,12 +98,12 @@ namespace PPE.viewModel
           
        
 
-        public viewModelCredits(DaoClient theDaoClient)
+        public viewModelCredits(DaoClient theDaoClient, DaoTransaction theDaoTransac)
         {
             vmDaoClient = theDaoClient;
-           
+            vmDaoTransaction = theDaoTransac;
             listClient = new ObservableCollection<Client>(theDaoClient.SelectAll());
-            
+            listReservationAF = new ObservableCollection<Reservation>(theDaoTransac.LesReservSansTransac());
         }
 
         public ICommand Valider

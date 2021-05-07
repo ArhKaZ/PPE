@@ -19,7 +19,7 @@ namespace PPE.viewModel
         private ICommand updateCommand;
         private ObservableCollection<Transaction> listTransaction;
         private ObservableCollection<Client> listClient;
-        private Transaction maTransac = new Transaction();
+        private Transaction maTransac;
        
         public ObservableCollection<Transaction> ListTransaction { get => listTransaction; set => listTransaction = value; }
         public ObservableCollection<Client> ListClient { get => listClient; set => listClient = value; }
@@ -135,7 +135,15 @@ namespace PPE.viewModel
 
         public int Numero
         {
-            get => maTransac.Id;
+            get
+            {
+                if (maTransac != null)
+                {
+                    return maTransac.Id;
+                }
+                else
+                    return 0;
+            }
             set
             {
                 if (maTransac.Id != value)

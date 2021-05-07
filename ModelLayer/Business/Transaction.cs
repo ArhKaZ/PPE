@@ -37,5 +37,10 @@ namespace ModelLayer.Business
         public int Montant { get => montant; set => montant= value; }
         public Reservation Reservation { get => reservation; set => reservation = value; }
         public Client IdClient { get => idClient; set => idClient = value; }
+
+        public override string ToString()
+        {
+            return "n°" + this.Id + " " + this.IdClient.Prenom + " " + this.IdClient.Nom + " " + this.Montant + "€" ;
+        }
     }
 }

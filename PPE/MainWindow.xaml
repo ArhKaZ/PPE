@@ -31,7 +31,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="Lst_Clients" SelectedItem="{Binding Client}" IsSynchronizedWithCurrentItem="True" Grid.RowSpan="8" ItemsSource="{Binding ListClient}" Grid.Row="1" Grid.Column="0" BorderBrush="Black" />
+                    <ListBox x:Name="Lst_Clients" Background="#FFD3E9F7" SelectedItem="{Binding Client}" IsSynchronizedWithCurrentItem="True" Grid.RowSpan="8" ItemsSource="{Binding ListClient}" Grid.Row="1" Grid.Column="0" BorderBrush="Black" />
                     <Rectangle x:Name="Rc" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="8" Stroke="Black"/>
                     <TextBlock x:Name="Txt_Def10" Grid.Column="1" Grid.Row="0" Height="30" Width="110" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="150,30,0,0" Text="Rechercher : "/>
                     <TextBox x:Name="Txt_SearchC" Text="{Binding Recherche, Mode=TwoWay}" Grid.Column="2"  Grid.Row="0" Width="250" Height="40" HorizontalAlignment="Left" Background="#FFD3E9F7" FontSize="30" Margin="0,25" />
@@ -77,7 +77,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="Lst_ClientsC" SelectedItem="{Binding Client}" Grid.Column="0" Grid.Row="1" BorderBrush="Black" ItemsSource="{Binding ListClient}" Grid.RowSpan="8" />
+                    <ListBox x:Name="Lst_ClientsC" Background="#FFD3E9F7" SelectedItem="{Binding Client}" Grid.Column="0" Grid.Row="1" BorderBrush="Black" ItemsSource="{Binding ListClient}" Grid.RowSpan="8" />
                     <TextBlock x:Name="Txt_Def0" Grid.Column="0" Grid.Row="0" Height="30" Width="110" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="360,30" Text="Rechercher : "/>
                     <TextBox x:Name="Txt_SearchCC" Text="{Binding Rechercher}" Grid.Column="0" Grid.Row="0" Width="350" Height="40" HorizontalAlignment="Right" Background="#FFD3E9F7" FontSize="30" />
                     <Rectangle x:Name="Rc_Tour1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Stroke="Black"/>

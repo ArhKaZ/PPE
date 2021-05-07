@@ -44,7 +44,7 @@ namespace ModelLayer.Business
 
         public override string ToString()
         {
-            return this.Nom;
+            return this.Nom + this.Prenom;
         }
 
     }

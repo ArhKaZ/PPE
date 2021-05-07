@@ -18,11 +18,12 @@ namespace ModelLayer.Data
         private DaoClient theDaoClient;
         private DaoReservation theDaoReservation;
 
-        public DaoTransaction(Dbal mydbal, DaoClient theDaoClient, DaoReservation theDaoReservation)
+        public DaoTransaction(Dbal mydbal, DaoClient unDaoClient, DaoReservation unDaoReservation)
         {
             this.mydbal = mydbal;
-            this.theDaoClient = theDaoClient;
-            this.theDaoReservation = theDaoReservation;
+            this.theDaoClient = unDaoClient;
+            this.theDaoReservation = unDaoReservation;
+            
         }
 
         public int ReturnnextId()
@@ -35,7 +36,7 @@ namespace ModelLayer.Data
         {
             List<Reservation> lesRsansT = new List<Reservation>();
             List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
-            List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
+            List<Transaction> lesTransac = new List<Transaction>(this.SelectAll());
                 foreach (Reservation r in lesReserv)
                 {
                 foreach (Transaction t in lesTransac)
