@@ -30,6 +30,7 @@ namespace ModelLayer.Business
             mdp = unmdp;
         }
 
+        public Utilisateur() { }
         public int Id { get => id; set => id = value; }
         public string RoleUser { get => roleUser; set => roleUser = value; }
         public Ville Ville { get => idVille; set => idVille = value; }

@@ -22,24 +22,25 @@ namespace PPE
     public partial class Connexion : Window
     {
         private DaoUtilisateur vmDaoUser;
+        private DaoClient vmDaoClient;
+        private DaoTransaction vmDaoTransac;
         private List<Utilisateur> listUser;
-        private Utilisateur unUser;
+        
         private DaoVille vmDaoVille;
-        public Connexion(DaoUtilisateur theDaoUtilisateur, DaoVille theDaoVille)
+        public Connexion(DaoClient theDaoClient,DaoTransaction theDaoTransaction, DaoUtilisateur theDaoUtilisateur,DaoVille theDaoVille)
         {
             vmDaoVille = theDaoVille;
             vmDaoUser = theDaoUtilisateur;
             listUser = new List<Utilisateur>(vmDaoUser.SelectAll());
-            
+            vmDaoClient = theDaoClient;
+            vmDaoTransac = theDaoTransaction;
             InitializeComponent();
         }
 
         private void Btn_co_Click(object sender, RoutedEventArgs e)
         {
-            
-            unUser.Identifiant = Txt_box_user.Text;
-            unUser.Mdp = Txt_box_mdp.Text;
-            
+            Utilisateur unUser = new Utilisateur(Txt_box_user.Text, Txt_box_mdp.Text);
+           
             foreach (Utilisateur u in listUser)
             {
                 if (u.Identifiant == unUser.Identifiant)
@@ -47,23 +48,20 @@ namespace PPE
                     if (u.Mdp == unUser.Mdp)
                     {
                         this.Close();
-                        
+
                     }
-                    else
-                    {
-                        MessageBox.Show("Le mot de passe saisit n'est pas bon");
-                       
-                    }
+                    
                 }
-                else
-                {
-                    MessageBox.Show("Les identifiants saisit ne sont pas bon"); 
-                }
+                
             }
             
         }
 
-        
+        private void WndConnexion_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MainWindow wnd = new MainWindow(vmDaoClient, vmDaoTransac);
+            wnd.Show();
+        }
     }
     }
 

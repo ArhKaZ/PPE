@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPE"
         mc:Ignorable="d"
-        Title="Connexion" Height="450" Width="800" WindowStyle="None">
+        Title="Connexion" Height="450" Width="800" WindowStyle="None" Closing="WndConnexion_Closing">
     <Grid>
         <Grid x:Name="Grid_Connexion" RenderTransformOrigin="0.491,0.494">
             <TextBox Name="Txt_box_user" Text="{Binding NomUser}" HorizontalAlignment="Left" Height="23" Margin="326,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

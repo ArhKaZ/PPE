@@ -31,7 +31,17 @@ namespace PPE.viewModel
         }
         public Transaction Transaction
         {
-            get => maTransac;
+            get
+            {
+                if (maTransac != null)
+                {
+                    return maTransac;
+                }
+                else
+                {
+                    return null;
+                }
+            }
             set
             {
                 if (maTransac != value)
@@ -47,7 +57,17 @@ namespace PPE.viewModel
 
         public string Nom
         {
-            get => maTransac.IdClient.Nom;
+            get
+            {
+                if (maTransac != null)
+                {
+                    return maTransac.IdClient.Nom;
+                }
+                else
+                {
+                    return null;
+                }
+            }
             set
             {
                 if (maTransac.IdClient.Nom != value)
@@ -66,7 +86,17 @@ namespace PPE.viewModel
         }
         public string Ville
         {
-            get => maTransac.Reservation.IdSalle.IdLieu.Nom;
+            get
+            {
+                if (maTransac != null)
+                {
+                    return maTransac.Reservation.IdSalle.IdLieu.Nom; ;
+                }
+                else
+                {
+                    return null;
+                }
+            }
             set
             {
                 if (maTransac.Reservation.IdSalle.IdLieu.Nom != value)
@@ -80,7 +110,19 @@ namespace PPE.viewModel
 
         public int Prix
         {
-            get => maTransac.Montant;
+            get
+            {
+                if (maTransac != null)
+                {
+                    return maTransac.Montant ;
+                }
+                else
+                {
+                    return 0;
+                }
+            
+            }
+               
             set
             {
                 if (maTransac.Montant != value)

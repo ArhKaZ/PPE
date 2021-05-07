@@ -15,7 +15,7 @@ namespace ModelLayer.Data
 
 
         //Constructor
-        public Dbal(string database, string uid = "root", string password = "5MichelAnnecy", string server = "localhost")
+        public Dbal(string database, string uid = "root", string password = "360LAplakette", string server = "localhost")
         {
             Initialize(database, uid, password, server);
         }
