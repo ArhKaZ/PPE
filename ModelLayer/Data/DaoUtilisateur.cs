@@ -14,20 +14,19 @@ namespace ModelLayer.Data
     public class DaoUtilisateur
     {
         private Dbal mydbal;
-        private DaoUtilisateur theDaoUser;
         private DaoVille theDaoVille;
 
-        public DaoUtilisateur(Dbal dbal, DaoVille theDaoVille)
+        public DaoUtilisateur(Dbal dbal, DaoVille unDaoVille)
         {
             mydbal = dbal;
-            this.theDaoVille = theDaoVille;
+            theDaoVille = unDaoVille;
         }
 
         public void Insert(Utilisateur unUser)
         {
-            string query = "Utilisateur (id, role, idVille, identifiant, mdp) VALUES ("
+            string query = "Utilisateur (id, roleUser, idVille, identifiant, mdp) VALUES ("
                 + unUser.Id + ",'"
-                + unUser.Role + "',"
+                + unUser.RoleUser + "',"
                 + unUser.Ville.Id + ",'"
                 + unUser.Identifiant.Replace("'", "''") + ","
                 + unUser.Mdp.Replace("'", "''") + ")";
@@ -38,7 +37,7 @@ namespace ModelLayer.Data
         public void Update(Utilisateur unUser)
         {
             string query = "Utilisateur Set id= " + unUser.Id 
-                + ", role = '" + unUser.Role
+                + ", role = '" + unUser.RoleUser
                 + ", ville = " + unUser.Ville.Id
                 + ", identifiant = '" + unUser.Identifiant.Replace("'", "''")
                 + ", mdp = '" + unUser.Mdp.Replace("'", "''");
@@ -58,13 +57,17 @@ namespace ModelLayer.Data
 
             foreach (DataRow r in myTable.Rows)
             {
+                int id = (int)r["id"];
+                string role = (string)r["roleUser"];
+                string ide = (string)r["identifiant"];
+                string mdp = (string)r["mdp"];
                 Ville maVille = this.theDaoVille.SelectbyId((int)r["idVille"]);
                 listUtilisateur.Add(new Utilisateur(
-                    (int)r["id"],
-                    (char)r["role"],
-                    maVille,
-                    (string)r["identifiant"],
-                    (string)r["mdp"]));
+                (int)r["id"],
+                 (string)r["roleUser"],
+                 maVille,
+                 (string)r["identifiant"],
+                 (string)r["mdp"]));
             }
             return listUtilisateur;
         }
@@ -74,7 +77,7 @@ namespace ModelLayer.Data
             DataRow rowUtilisateur = this.mydbal.SelectById("utilisateur", id);
             Ville maVille = this.theDaoVille.SelectbyId((int)rowUtilisateur["idVille"]);
             return new Utilisateur((int)rowUtilisateur["id"],
-                (char)rowUtilisateur["role"],
+                (string)rowUtilisateur["roleUser"],
                 maVille,
                 (string)rowUtilisateur["identifiant"],
                 (string)rowUtilisateur["mdp"]); 

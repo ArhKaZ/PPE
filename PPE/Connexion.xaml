@@ -6,14 +6,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PPE"
         mc:Ignorable="d"
-        Title="Connexion" Height="450" Width="800">
+        Title="Connexion" Height="450" Width="800" WindowStyle="None">
     <Grid>
         <Grid x:Name="Grid_Connexion" RenderTransformOrigin="0.491,0.494">
             <TextBox Name="Txt_box_user" Text="{Binding NomUser}" HorizontalAlignment="Left" Height="23" Margin="326,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox Name="Txt_box_mdp" Text="{Binding Mdp}" HorizontalAlignment="Left" Height="23" Margin="326,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Name="Lbl_user" Content=" Utilisateur " HorizontalAlignment="Left" Margin="354,140,0,0" VerticalAlignment="Top"/>
             <Label Name="Lbl_mdp" Content="Mot de passe" HorizontalAlignment="Left" Margin="349,221,0,0" VerticalAlignment="Top"/>
-            <Button Name="Btn_co" Command="{Binding Valider}" CommandParameter="{Binding ElementName=WndConnexion}" Content="Se Connecter" HorizontalAlignment="Left" Margin="349,328,0,0" VerticalAlignment="Top" Width="81"/>
+            <Button Name="Btn_co"   Content="Se Connecter" HorizontalAlignment="Left" Margin="349,330,0,0" VerticalAlignment="Top" Width="81" Click="Btn_co_Click" Height="32"/>
             <Label Content="CONNEXION" HorizontalAlignment="Left" Margin="307,46,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         </Grid>
     </Grid>

@@ -14,7 +14,7 @@ namespace ModelLayer.Data
     public class DaoVille
     {
         private Dbal mydbal;
-        private DaoVille theDaoVille;
+       
 
         public DaoVille(Dbal dbal)
         {
@@ -57,7 +57,7 @@ namespace ModelLayer.Data
 
         public Ville SelectbyId(int id)
         {
-            DataRow rowVille = this.mydbal.SelectById("ville", id);
+            DataRow rowVille = this.mydbal.SelectById("Ville", id);
             return new Ville((int)rowVille["id"],(string)rowVille["nom"]);
         }
 

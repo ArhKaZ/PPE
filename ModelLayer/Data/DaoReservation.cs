@@ -13,7 +13,7 @@ namespace ModelLayer.Data
     public class DaoReservation
     {
         private Dbal mydbal;
-        private DaoReservation theDaoReservation;
+        
         private DaoClient theDaoClient;
         private DaoSalle theDaoSalle;
         private DaoUtilisateur theDaoUtilisateur;
@@ -65,7 +65,7 @@ namespace ModelLayer.Data
 
         public Reservation SelectbyId(int id)
         {
-            DataRow rowReservation = this.mydbal.SelectById("resevation", id);
+            DataRow rowReservation = this.mydbal.SelectById("reservation", id);
             Client unCli = this.theDaoClient.SelectById((int)rowReservation["idClient"]);
             Salle uneSalle = this.theDaoSalle.SelectById((int)rowReservation["idSalle"]);
             Utilisateur unUtilisateur = this.theDaoUtilisateur.SelectbyId((int)rowReservation["idTechnicien"]);

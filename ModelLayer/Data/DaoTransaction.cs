@@ -31,22 +31,30 @@ namespace ModelLayer.Data
             return (int)myRow["id"] + 1;
         }
 
-        //public List<Reservation> LesReservSansTransac()
-        //{
-        //    List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
-        //    List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
-        //    foreach (Transaction t in lesTransac)
-        //    {
-        //        // Test pour savoir si une transac existe pour une reservation
-        //    }
-        //}
-        //public bool TestCreditMontant(Client uncli,int Montant)
+        public List<Reservation> LesReservSansTransac()
+        {
+            List<Reservation> lesRsansT = new List<Reservation>();
+            List<Reservation> lesReserv = new List<Reservation>(theDaoReservation.SelectAll());
+            List<Transaction> lesTransac = new List<Transaction>(theDaoTransaction.SelectAll());
+                foreach (Reservation r in lesReserv)
+                {
+                foreach (Transaction t in lesTransac)
+                 {
+                    if (t.Reservation.Id == r.Id)
+                    {
+                        lesRsansT.Add(r);
+                    }
+                }
+            }
+            return lesRsansT;
+        }
+        //public bool TestCreditMontant(Client uncli, int Montant)
         //{
         //    if ()
-        //    if (Montant > uncli.Credit)
-        //    {
-                
-        //    }
+        //        if (Montant > uncli.Credit)
+        //        {
+
+        //        }
         //}
         public void Insert(Transaction uneTransac)
         {
@@ -84,7 +92,7 @@ namespace ModelLayer.Data
             foreach (DataRow r in rowTransaction.Rows)
             {
                 Client unCli = this.theDaoClient.SelectById((int)r["idClient"]);
-                Reservation uneReserv = this.theDaoReservation.SelectbyId((int)r["idReservation"]);
+                Reservation uneReserv = this.theDaoReservation.SelectbyId((int)r["reservation"]);
                 listTransaction.Add(new Transaction((int)r["id"], (string)r["operation"], (int)r["montant"], uneReserv, unCli));
             }
             return listTransaction;

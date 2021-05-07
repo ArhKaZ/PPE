@@ -10,24 +10,28 @@ namespace ModelLayer.Business
     public class Utilisateur
     {
         private int id;
-        private char role;
+        private string roleUser;
         private Ville idVille;
         private string identifiant;
         private string mdp;
 
-        public Utilisateur(int id, char roleUser, Ville uneVille, string identifiant, string mdp)
+        public Utilisateur(int unid, string roleduUser, Ville uneVille, string unidentifiant, string unmdp)
         {
-            Id = id;
-            Role = roleUser;
+            id = unid;
+            roleUser = roleduUser;
             idVille = uneVille;
-            Identifiant = identifiant;
-            Mdp = mdp;
+            identifiant = unidentifiant;
+            mdp = unmdp;
         }
         
-        public Utilisateur(){}
+        public Utilisateur(string unidentifiant, string unmdp)
+        {
+            identifiant = unidentifiant;
+            mdp = unmdp;
+        }
 
         public int Id { get => id; set => id = value; }
-        public char Role { get => role; set => role = value; }
+        public string RoleUser { get => roleUser; set => roleUser = value; }
         public Ville Ville { get => idVille; set => idVille = value; }
         public string Identifiant { get => identifiant; set => identifiant = value; }
         public string Mdp { get => mdp; set => mdp = value; }

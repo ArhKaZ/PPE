@@ -8,6 +8,7 @@ using System.Windows;
 using ModelLayer.Business;
 using ModelLayer.Data;
 using PPE.viewModel;
+using CommonServiceLocator;
 namespace PPE
 {
     /// <summary>
@@ -38,14 +39,16 @@ namespace PPE
             theDaoSalle = new DaoSalle(mydbal, theDaoVille, theDaoTheme);
             theDaoTheme = new DaoTheme(mydbal);
             theDaoTransaction = new DaoTransaction(mydbal, theDaoClient, theDaoReservation);
-            theDaoUtilisateur = new DaoUtilisateur(mydbal, theDaoVille);
             theDaoVille = new DaoVille(mydbal);
-            //Connexion wndco = new Connexion(theDaoUtilisateur);
-            //viewModelConnexion vmUser = new viewModelConnexion(theDaoUtilisateur);
-            //wndco.Show();
-           
-            MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoVille);
-            wnd.Show();
+            theDaoUtilisateur = new DaoUtilisateur(mydbal, theDaoVille);
+            
+            Connexion wndco = new Connexion(theDaoUtilisateur, theDaoVille);
+            wndco.Show();
+            if (wndco.IsActive == false)
+            {
+                MainWindow wnd = new MainWindow(theDaoAvis, theDaoClient, theDaoObstacle, theDaoPObstacle, theDaoReservation, theDaoSalle, theDaoTheme, theDaoTransaction, theDaoVille);
+                wnd.Show();
+            }
         }
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
