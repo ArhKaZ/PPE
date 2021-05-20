@@ -33,7 +33,10 @@ namespace PPE
 
             //Grid_Transac.DataContext = new viewModelTransactions(theDaoTransaction); ;
         }
-        
-        
+
+        private void Lst_Clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
