@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -22,17 +23,19 @@ namespace PPE.viewModel
         private Client leCli = new Client();
         private Transaction laTransaction = new Transaction();
         private ObservableCollection<Reservation> listReservationAF;
-        //Public
+        private ICommand searchCommand;
         public ObservableCollection<Client> ListClient { get => listClient; set => listClient = value; }
         public ObservableCollection<Transaction> ListTransaction { get => listTransaction; set => listTransaction = value; }
         public ObservableCollection<Reservation> ListReservationAF { get => listReservationAF; set => listReservationAF = value; }
         public int Montant { get; set; }
         public string Operation { get; set; }
+        public string Recherche { get; set; }
         
 
         public bool[] ModeArray
         {
-            get { return _modeArray; }
+            get { 
+                return _modeArray; }
         }
         public int SelectedMode
         {
@@ -120,14 +123,57 @@ namespace PPE.viewModel
 
         private void InsertTransac()
         {
-            int id = vmDaoTransaction.ReturnnextId();
-            Transaction maTransac = new Transaction(id, Operation, Montant, leCli);
-            vmDaoTransaction.Insert(maTransac);
-           // foreach (Client c in listClient)
-           // {
-            //    idf = idf + 1;
-           // }
-           // listClient.Add(Client);
+            if (this.ModeArray[0] == true)
+            {
+                int id = vmDaoTransaction.ReturnnextId();
+                Transaction maTransac = new Transaction(id, this.Operation, this.Montant, this.leCli);
+                vmDaoTransaction.Insert(maTransac);
+            }
+            else
+            {
+                // foreach (Client c in listClient)
+                // {
+                //    idf = idf + 1;
+                // }
+                // listClient.Add(Client);
+            }
+        }
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (this.searchCommand == null)
+                {
+                    this.searchCommand = new RelayCommand(() => Rechercher(), () => true);
+                }
+                return this.searchCommand;
+
+            }
+        }
+
+        public void RefreshListCli()
+        {
+            ObservableCollection<Client> lalistClient = new ObservableCollection<Client>(vmDaoClient.SelectAll());
+            listClient.Clear();
+            foreach (Client c in lalistClient)
+            {
+                listClient.Add(c);
+            }
+        }
+
+        private void Rechercher()
+        {
+            if (this.Recherche != "")
+            {
+                List<Client> listClienIndep = new List<Client>(vmDaoClient.SearchbyName("Clients", "Nom Like '" + this.Recherche + "' or Prenom like '" + this.Recherche + "'"));
+                listClient.Clear();
+                foreach (Client c in listClienIndep)
+                {
+                    listClient.Add(c);
+                }
+            }
+            else RefreshListCli();
         }
     }
 }

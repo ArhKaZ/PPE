@@ -78,8 +78,9 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <ListBox x:Name="Lst_ClientsC" Background="#FFD3E9F7" SelectedItem="{Binding Client}" Grid.Column="0" Grid.Row="1" BorderBrush="Black" ItemsSource="{Binding ListClient}" Grid.RowSpan="8" />
-                    <TextBlock x:Name="Txt_Def0" Grid.Column="0" Grid.Row="0" Height="30" Width="110" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="360,30" Text="Rechercher : "/>
-                    <TextBox x:Name="Txt_SearchCC" Text="{Binding Rechercher}" Grid.Column="0" Grid.Row="0" Width="350" Height="40" HorizontalAlignment="Right" Background="#FFD3E9F7" FontSize="30" />
+                    <TextBlock x:Name="Txt_Def0" Grid.Column="1" Grid.Row="0" Height="30" Width="110" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,25,59,0" Text="Rechercher : "/>
+                    <TextBox x:Name="Txt_SearchCr" Text="{Binding Recherche, Mode=TwoWay}" Grid.Column="2"  Grid.Row="0" Width="250" Height="40" HorizontalAlignment="Left" Background="#FFD3E9F7" FontSize="30" Margin="0,25" Grid.ColumnSpan="2" />
+                    <Button x:Name="Btn_RechercheCr" Margin="57,25,72,25" Grid.Column="3" Grid.ColumnSpan="1" VerticalAlignment="Center" Height="40" Command="{Binding SearchCommand}" Content="Rechercher"/>
                     <Rectangle x:Name="Rc_Tour1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Stroke="Black"/>
                     <TextBlock x:Name="Txt_NomRc1" Grid.Column="2" Grid.Row="1" Text="    Informations" Width="200" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" FontSize="25"/>
                     <TextBlock x:Name="Txt_Def1" Grid.Column="1" Grid.Row="1" Height="30" Width="60" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="117,68,59,40" Text="Nom : " Grid.RowSpan="2"/>
@@ -117,8 +118,6 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <ListBox x:Name="Lst_Transaction" Grid.Row="1" Grid.RowSpan="4" SelectedItem="{Binding Transaction}" ItemsSource="{Binding ListTransaction}" BorderBrush="Black" Background="#FFD3E9F7" Grid.ColumnSpan="2"/>
-                    <TextBlock x:Name="Txt_Def5" Grid.Column="1" Grid.Row="0" Height="40" Width="110" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="433,20,0,0" Text="Rechercher : " RenderTransformOrigin="0.5,0.7"/>
-                    <TextBox x:Name="Txt_SearchCT" Text="{Binding Recherche}" Grid.Column="1" Grid.Row="0" Width="350" Height="40" HorizontalAlignment="Right" Background="#FFD3E9F7" FontSize="30" Grid.ColumnSpan="2" Margin="0,20,33,30" />
                     <Rectangle x:Name="Rc_Haut" Grid.Column="2" Grid.Row="1"  VerticalAlignment="Stretch" Stroke="Black" Grid.ColumnSpan="2"/>
                     <TextBlock x:Name="Txt_Def6" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Text="Ville / Client" FontWeight="Bold" Margin="257,0,256,0"/>
                     <RadioButton x:Name="Rd_Ville" Content="Ville" IsChecked="{Binding Path=ModeArray[0], Mode=TwoWay}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="129,70,122,70" Width="63" />
